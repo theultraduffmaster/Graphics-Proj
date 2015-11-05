@@ -23,6 +23,32 @@ pi = Math.PI,
 UpArrow   = 38,
 DownArrow = 40,
 
+/**
+ * reusable game functions
+ */
+canvas,
+ctx,
+keystate,
+
+/**
+ * The controllable player paddle
+ */
+player = {
+	x: null,
+	y: null,
+
+	width:  18,
+	height: 90,
+
+	/**
+	 * Move as told to by the arrow commands
+	 */
+	update: function() {
+		if (keystate[UpArrow]) this.y -= 7;
+		if (keystate[DownArrow]) this.y += 7;
+		// Ensure the paddle stays inside of the canvas at all times
+		this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
+	},
     </script>
   </body>
 </html>
