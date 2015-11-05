@@ -100,7 +100,7 @@ ball = {
     
     
 	side:  10,
-	speed: 16,
+	speed: 18, //a more compeitive speed than 16
 /**
 	 * Serve the ball towards a specified side
 	 * 
@@ -160,7 +160,14 @@ ball = {
             
 		}
 	},
-
+/**
+	 * Draws the tennis ball object to the canvas
+	 */
+	draw: function() {
+		ctx.fillRect(this.x, this.y, this.side, this.side);
+        ctx.fillStyle = "white"; //color the paddles
+	}
+};
 
     </script>
   </body>
