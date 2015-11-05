@@ -101,6 +101,44 @@ ball = {
     
 	side:  10,
 	speed: 16,
+/**
+	 * Serve the ball towards a specified side
+	 * 
+	 */
+	serve: function(side) {
+		// set the x and y position of the serve
+		var r = Math.random();
+		this.x = side===1 ? player.x+player.width : ai.x - this.side;
+		this.y = (HEIGHT - this.side)*r;
+		/* calculate the angles,  higher/lower on the y-axis = steeper angle i.e. catching the ball on the right or left side of the paddle will give more velocity rather than the center of the paddle
+        */
+		var phi = 0.1*pi*(1 - 2*r);
+		// update the velocity, direction and magnitude
+		this.vel = {
+			x: side*this.speed*Math.cos(phi),
+			y: this.speed*Math.sin(phi)
+		}
+	},
+
+	/**
+	 * Update the ball's position and ensure it stays within the canvas
+	 */
+	update: function() {
+		// update the position with new velocity
+		this.x += this.vel.x;
+		this.y += this.vel.y;
+		// check if within the boundaries on the y axis
+		if (0 > this.y || this.y+this.side > HEIGHT) {
+			// calculate how inside of the canvas the ball is
+			var offset = this.vel.y < 0 ? 0 - this.y : HEIGHT - (this.y+this.side);
+			this.y += 2*offset;
+			// matches the y velocity
+			this.vel.y *= -1;
+		}
+		// a function to check intesection between two axis aligned bounding boxes (AABB we'll call it for now)
+		var AABBIntersect = function(ax, ay, aw, ah, bx, by, bw, bh) {
+			return ax < bx+bw && ay < by+bh && bx < ax+aw && by < ay+ah;
+		};
 
     </script>
   </body>
