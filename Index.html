@@ -49,6 +49,46 @@ player = {
 		// Ensure the paddle stays inside of the canvas at all times
 		this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
 	},
+    /**
+	 * function to draw the player's paddle onto the canvas
+	 */
+	draw: function() {
+		ctx.fillRect(this.x, this.y, this.width, this.height);
+        
+	}
+},
+
+/**
+ * The paddle that will be controlled by the ai
+ * 
+ */
+ai = {
+	x: null,
+	y: null,
+
+	width:  18,
+	height: 90,
+
+	/**
+	 * Reset the ai paddle depending on the position of the ball to optimize the challenge
+	 */
+	update: function() {
+		// function to calculate the ideal position in regards to the ball
+		var desty = ball.y - (this.height - ball.side)*0.5;
+		// slow the movement towards this ideal position
+		this.y += (desty - this.y) * 0.1;
+		// Ensure the ai does not leave the canvas
+		this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
+	},
+
+	/**
+	 * Function to draw the ai paddle to the canvas
+	 */
+	draw: function() {
+		ctx.fillRect(this.x, this.y, this.width, this.height);
+
+	}
+},
     </script>
   </body>
 </html>
