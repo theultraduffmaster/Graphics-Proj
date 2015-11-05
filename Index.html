@@ -153,6 +153,13 @@ ball = {
 			this.vel.x = smash*(pdle===player ? 1 : -1)*this.speed*Math.cos(phi);
 			this.vel.y = smash*this.speed*Math.sin(phi);
 		}
+        
+        // resets the ball when it goes off the canvas on the x axis
+		if (0 > this.x+this.side || this.x > WIDTH) {
+			this.serve(pdle===player ? 1 : -1);
+            
+		}
+	},
 
 
     </script>
