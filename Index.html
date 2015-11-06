@@ -168,6 +168,26 @@ ball = {
         ctx.fillStyle = "white"; //colors both the paddles of the player and the ai
 	} //ends draw
 }; //ends ball function
+        
+        /**
+ * Run the game
+ */
+function main() {
+	// create, initiate and edit the game canvas
+	canvas = document.createElement("canvas");
+	canvas.width = WIDTH;
+	canvas.height = HEIGHT;
+	ctx = canvas.getContext("2d");
+	document.body.appendChild(canvas); //Edits the body to add a child to it
+
+	keystate = {};
+	// keep track of the player keyboard presses
+	document.addEventListener("keydown", function(evt) {
+		keystate[evt.keyCode] = true;
+	});
+	document.addEventListener("keyup", function(evt) {
+		delete keystate[evt.keyCode];
+	});
 
     </script>
   </body>
