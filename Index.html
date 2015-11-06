@@ -222,6 +222,20 @@ function update() {
 	player.update();
 	ai.update();
 }
+        
+        /**
+ * Clear the canvas and redraw all game objects and the net for the game
+ */
+function draw() {
+	ctx.fillRect(0, 0, WIDTH, HEIGHT);
+    ctx.fillStyle = "rgba(3,115,11,0.8)"
+	ctx.save();
+
+	ctx.fillStyle = "rgba(241,249,6,0.8)"
+
+	ball.draw();
+	player.draw();
+	ai.draw();
 
     </script>
   </body>
