@@ -1,14 +1,15 @@
- <!DOCTYPE html>
-<html>
-  <head>
-    <head>
+<!doctype html>
+<html lang="en">
+<head>
 	<meta charset="UTF-8">
 	<title>Pong</title>
-   <link rel="Stylesheet" 	type="text/css"href="pong.css" />
-  </head>
-  <body>
-      <script type="text/javascript" src="d3.min.js"></script> 
-    <script>
+
+	<link rel="Stylesheet" 	type="text/css"href="pong.css" />
+	
+</head>
+<body>
+    <script type="text/javascript" src="d3.min.js"></script> 
+<script>
     //add d3 as a pathetic attempt at a "fan section"
     var mydata = [];
         for (var i = 0; i < 20; i++)
@@ -41,7 +42,8 @@
                   
 
             }
-                  
+    
+            
 var
 
 /**
@@ -50,10 +52,10 @@ var
 WIDTH  = 1300, // width of the game
 HEIGHT = 550, // height of the game
 
-pi = Math.PI, // pi = 3.14
+pi = Math.PI,  // pi = 3.14
 
 UpArrow   = 38, //up arrow key equals 38
-DownArrow = 40, // down arrow key equals 40
+DownArrow = 40, // down arrow key equals
 
 /**
  * reusable game functions
@@ -81,13 +83,15 @@ player = {
 		// Ensure the paddle stays inside of the canvas at all times
 		this.y = Math.max(Math.min(this.y, HEIGHT - this.height), 0);
 	}, //ends update function
-    /**
+    
+
+	/**
 	 * function to draw the player's paddle onto the canvas
 	 */
 	draw: function() {
 		ctx.fillRect(this.x, this.y, this.width, this.height);
         
-	}//ends draw function
+	} //ends draw function
 }, //ends player function
 
 /**
@@ -98,8 +102,9 @@ ai = {
 	x: null,
 	y: null,
 
-	width:  18, //ai paddle width
-	height: 90, //ai paddle height
+	width:  30, //ai paddle width
+	height: 150, //ai paddle height
+    //These have been changed to a bigger size to make the ai more a challenge seen as it can also at times move faster
 
 	/**
 	 * Reset the ai paddle depending on the position of the ball to optimize the challenge
@@ -121,6 +126,7 @@ ai = {
 
 	} //ends draw function
 }, //ends ai function
+    
 /**	
  * The tennis ball object
  * 
@@ -133,7 +139,8 @@ ball = {
     
 	side:  10, //size of the ball
 	speed: 18, //speed of ball, a more compeitive speed than 16
-/**
+
+	/**
 	 * Serve the ball towards a specified side
 	 * 
 	 */
@@ -166,17 +173,18 @@ ball = {
 			this.y += 2*offset;
 			// matches the y velocity
 			this.vel.y *= -1;
-		} //ends if 
+		} //ends if
 		// a function to check intesection between two axis aligned bounding boxes (AABB for short for easyness sake)
 		var AABBIntersect = function(ax, ay, aw, ah, bx, by, bw, bh) {
 			return ax < bx+bw && ay < by+bh && bx < ax+aw && by < ay+ah;
 		}; //ends var AABBIntersect
-        // checks against the ai paddle to check collision on the x axis and if the ball should be returned
+
+		// checks against the ai paddle to check collision on the x axis and if the ball should be returned
 		var pdle = this.vel.x < 0 ? player : ai;
 		if (AABBIntersect(pdle.x, pdle.y, pdle.width, pdle.height,
 				this.x, this.y, this.side, this.side)
 		) {	
-            // sets the x position and calculate the angle of the ball and its trajectory
+			// sets the x position and calculate the angle of the ball and its trajectory
 			this.x = pdle===player ? player.x+player.width : ai.x - this.side;
 			var n = (this.y+this.side - pdle.y)/(pdle.height+this.side);
 			var phi = 0.25*pi*(2*n - 1); // pi÷4 = 45
@@ -185,23 +193,24 @@ ball = {
 			this.vel.x = smash*(pdle===player ? 1 : -1)*this.speed*Math.cos(phi);
 			this.vel.y = smash*this.speed*Math.sin(phi);
 		} //ends math functions
-        
-        // resets the ball when it goes off the canvas on the x axis and starts the serve again
+
+		 // resets the ball when it goes off the canvas on the x axis and starts the serve again
 		if (0 > this.x+this.side || this.x > WIDTH) {
 			this.serve(pdle===player ? 1 : -1);
             
 		} //ends if
 	}, //ends update function
-/**
-	 * Draws the tennis ball object to the canvas with its functions
+
+	/**
+	 * Draws the tennis ball object to the canvas with its function
 	 */
 	draw: function() {
 		ctx.fillRect(this.x, this.y, this.side, this.side);
-        ctx.fillStyle = "white"; //colors both the paddles of the player and the ai
+        ctx.fillStyle = "white"; //colors both the player and the ai's paddles
 	} //ends draw
 }; //ends ball function
-        
-        /**
+
+/**
  * Run the game
  */
 function main() {
@@ -220,8 +229,8 @@ function main() {
 	document.addEventListener("keyup", function(evt) {
 		delete keystate[evt.keyCode];
 	});
-    
-    init(); // initiate the game objects
+
+	init(); // initiate the game objects
 
 	// allow the game to keep looping
 	var loop = function() {
@@ -232,8 +241,8 @@ function main() {
 	};
 	window.requestAnimationFrame(loop, canvas);
 }
-        
-        /**
+
+/**
  * Start with game objects and set their initial positions
  */
 function init() { 
@@ -245,8 +254,8 @@ function init() {
 
 	ball.serve(1);
 }
-        
-        /**
+
+/**
  * Update all of the game objects
  */
 function update() {
@@ -254,8 +263,8 @@ function update() {
 	player.update();
 	ai.update();
 }
-        
-        /**
+
+/**
  * Clear the canvas and redraw all game objects and the net for the game
  */
 function draw() {
@@ -268,8 +277,8 @@ function draw() {
 	ball.draw();
 	player.draw();
 	ai.draw();
-    
-    // draw the dividing net
+
+	// draw the dividing net
     ctx.fillStyle = "rgba(255,255,255,1)"
     var w = 4;
 	var x = (WIDTH - w)*0.5;
@@ -279,12 +288,13 @@ function draw() {
 		ctx.fillRect(x, y+step*0.25, w, step*0.5);
 		y += step;
 	}
-    
-    ctx.restore();
+
+	ctx.restore();
 }
     
+
 // now start and run the whole game
 main();
-    </script>
-  </body>
+</script>
+</body>
 </html>
