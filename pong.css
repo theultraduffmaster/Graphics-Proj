@@ -1,0 +1,14 @@
+  body {
+          background-color: darkred;
+      }
+        /* Sets up the canvas and settings for the canvas */
+	canvas {
+		display: block;
+		position: absolute;
+		margin: auto;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
