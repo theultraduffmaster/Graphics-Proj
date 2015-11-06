@@ -236,6 +236,17 @@ function draw() {
 	ball.draw();
 	player.draw();
 	ai.draw();
+    
+    // draw the dividing net
+    ctx.fillStyle = "rgba(255,255,255,1)"
+    var w = 4;
+	var x = (WIDTH - w)*0.5;
+	var y = 0;
+	var step = HEIGHT/30; // decides how many net segments there are
+	while (y < HEIGHT) {
+		ctx.fillRect(x, y+step*0.25, w, step*0.5);
+		y += step;
+	}
 
     </script>
   </body>
