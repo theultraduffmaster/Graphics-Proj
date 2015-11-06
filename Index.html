@@ -247,7 +247,12 @@ function draw() {
 		ctx.fillRect(x, y+step*0.25, w, step*0.5);
 		y += step;
 	}
-
+    
+    ctx.restore();
+}
+    
+// now start and run the whole game
+main();
     </script>
   </body>
 </html>
