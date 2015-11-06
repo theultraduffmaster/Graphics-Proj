@@ -188,6 +188,18 @@ function main() {
 	document.addEventListener("keyup", function(evt) {
 		delete keystate[evt.keyCode];
 	});
+    
+    init(); // initiate the game objects
+
+	// allow the game to keep looping
+	var loop = function() {
+		update();
+		draw();
+
+		window.requestAnimationFrame(loop, canvas);
+	};
+	window.requestAnimationFrame(loop, canvas);
+}
 
     </script>
   </body>
