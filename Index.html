@@ -200,6 +200,19 @@ function main() {
 	};
 	window.requestAnimationFrame(loop, canvas);
 }
+        
+        /**
+ * Start with game objects and set their initial positions
+ */
+function init() { 
+	player.x = player.width; //Ensures the player x position will take into account the player width
+	player.y = (HEIGHT - player.height)/2; //Ensures the player y position will take into account the player height
+
+	ai.x = WIDTH - (player.width + ai.width); //Ensures the ai paddle's always stays in the same place on the x axis
+	ai.y = (HEIGHT - ai.height)/2; //Ensures the ai paddle cannot go beyond the height of the canvas
+
+	ball.serve(1);
+}
 
     </script>
   </body>
